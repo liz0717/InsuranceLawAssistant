@@ -1,5 +1,7 @@
 import streamlit as st
 
+from modules.pdf_reader import extract_text_from_pdf
+
 st.set_page_config(
     page_title="Insurance Law Assistant",
     page_icon="📚",
@@ -13,19 +15,31 @@ st.markdown("---")
 st.subheader("法規版本比較")
 
 old_pdf = st.file_uploader(
-    "請上傳舊版法規 PDF",
-    type=["pdf"],
-    key="old"
+    "請上傳舊版法規",
+    type="pdf"
 )
 
 new_pdf = st.file_uploader(
-    "請上傳新版法規 PDF",
-    type=["pdf"],
-    key="new"
+    "請上傳新版法規",
+    type="pdf"
 )
 
-if old_pdf and new_pdf:
-    st.success("✅ PDF 已成功上傳！")
+if old_pdf:
 
-    if st.button("開始比較"):
-        st.info("🚧 功能開發中...")
+    st.success("舊版 PDF 上傳成功")
+
+    old_text = extract_text_from_pdf(old_pdf)
+
+    st.subheader("舊版法規內容")
+
+    st.text(old_text[:5000])
+
+if new_pdf:
+
+    st.success("新版 PDF 上傳成功")
+
+    new_text = extract_text_from_pdf(new_pdf)
+
+    st.subheader("新版法規內容")
+
+    st.text(new_text[:5000])
