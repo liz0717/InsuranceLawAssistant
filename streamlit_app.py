@@ -1,5 +1,5 @@
 import streamlit as st
-
+from modules.law_parser import split_articles
 from modules.pdf_reader import extract_text_from_pdf
 
 st.set_page_config(
@@ -32,7 +32,13 @@ if old_pdf:
 
     st.subheader("舊版法規內容")
 
-    st.text(old_text[:5000])
+    articles = split_articles(old_text)
+
+    for article in articles:
+
+        st.markdown("---")
+
+        st.text(article)
 
 if new_pdf:
 
@@ -42,4 +48,10 @@ if new_pdf:
 
     st.subheader("新版法規內容")
 
-    st.text(new_text[:5000])
+    articles = split_articles(new_text)
+
+    for article in articles:
+
+        st.markdown("---")
+
+        st.text(article)
