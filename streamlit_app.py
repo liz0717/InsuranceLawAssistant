@@ -1,4 +1,5 @@
 import streamlit as st
+from modules.law_cleaner import clean_text
 from modules.law_parser import split_articles
 from modules.pdf_reader import extract_text_from_pdf
 
@@ -30,6 +31,8 @@ if old_pdf:
 
     old_text = extract_text_from_pdf(old_pdf)
 
+    old_text = clean_text(old_text)
+
     st.subheader("舊版法規內容")
 
     articles = split_articles(old_text)
@@ -47,6 +50,8 @@ if new_pdf:
     st.success("新版 PDF 上傳成功")
 
     new_text = extract_text_from_pdf(new_pdf)
+
+    new_text = clean_text(new_text)
 
     st.subheader("新版法規內容")
 
