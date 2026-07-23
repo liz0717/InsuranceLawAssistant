@@ -38,7 +38,9 @@ if old_pdf:
 
         st.markdown("---")
 
-        st.text(article)
+        st.subheader(article.title)
+
+        st.text(article.content)
 
 if new_pdf:
 
@@ -54,4 +56,6 @@ if new_pdf:
 
         st.markdown("---")
 
-        st.text(article)
+        st.subheader(article.title)
+
+        st.text(article.content)
